@@ -6,8 +6,11 @@
 
         <title>Laravel</title>
     </head>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
     <body class="antialiased">
-        <div id="app"></div>
+        <div id="app">
+            <router-view></router-view>
+        </div>
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </body>
 </html>
