@@ -1,20 +1,18 @@
 <template>
-	<div>
-		<router-link :to="{name: 'home'}">home</router-link>
-		<router-link :to="{name: 'example'}">example</router-link>
-		<div class="mt-5">
-			<router-view></router-view>
-		</div>
-		
-	</div>
+  <div>
+    <nav class="navbar bg-white border-bottom navbar-light">
+      <router-link class="navbar-brand mr-auto" :to="{ name: 'home' }">LaravelBnb</router-link>
+      <router-link class="btn nav-button" :to="{ name: 'example' }">example</router-link>
+    </nav>
+    <div class="container-md mt-5 mb-5 pr-5 pl-5">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>
