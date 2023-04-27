@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<router-link to="/home">home</router-link>
-		<router-link to="/example">example</router-link>
+		<router-link :to="{name: 'home'}">home</router-link>
+		<router-link :to="{name: 'example'}">example</router-link>
 		<div class="mt-5">
 			<router-view></router-view>
 		</div>
