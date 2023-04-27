@@ -2,7 +2,8 @@ import VueRouter from 'vue-router';
 import Index from './components/Index';
 
 const routes = [
-	{ path: '/', component: Index }
+	{ path: '/home', component: require('./components/Home').default },
+	{ path: '/example', component: require('./components/Example').default },
 ];
 
 const router = new VueRouter({
