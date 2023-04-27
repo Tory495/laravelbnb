@@ -2,7 +2,10 @@
 	<div>
 		<router-link to="/home">home</router-link>
 		<router-link to="/example">example</router-link>
-		<router-view></router-view>
+		<div class="mt-5">
+			<router-view></router-view>
+		</div>
+		
 	</div>
 </template>
 
