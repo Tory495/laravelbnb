@@ -9,7 +9,7 @@
     
     <body class="antialiased">
         <div id="app">
-            <router-view></router-view>
+            <home></home>
         </div>
         <script src="{{ asset('js/app.js') }}" defer></script>
     </body>

@@ -1,12 +1,12 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import VueRouter from 'vue-router';
 import Index from './components/Index';
 
 const routes = [
 	{ path: '/', component: Index }
 ];
 
-const router = createRouter({
-	history: createWebHashHistory,
+const router = new VueRouter({
+	mode: "history",
 	routes
 });
 
