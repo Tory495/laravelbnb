@@ -3,13 +3,16 @@
     Rows: {{ rows }}
     <div v-if="loading">data is loading...</div>
     <div v-else>
-      <bookables-list-item
-        :item-title="bookable.title"
-        :item-content="bookable.content"
-        :item-price="1000"
-        v-for="(bookable, index) in bookables"
-        :key="index"
-      ></bookables-list-item>
+      <div class="row" v-for="row in rows" :key="'row' + row">
+        <div class="col" v-for="(bookable, col) in bookablesInRow(row)" :key="'col' + row + col">
+          <bookables-list-item
+            :item-title="bookable.title"
+            :item-content="bookable.content"
+            :item-price="1000"
+          ></bookables-list-item>
+        </div>
+        <div class="col" v-for="placeholder in placeholdersInRow(row)" :key="'placeholder' + row + placeholder"/>
+      </div>
     </div>
   </div>
 </template>
@@ -33,6 +36,15 @@ export default {
     rows() {
       return this.bookables ? Math.ceil(this.bookables.length / this.cols) : 0;
     },
+  },
+
+  methods: {
+    bookablesInRow(row) {
+      return this.bookables.slice((row - 1) * this.cols, row * this.cols);
+    },
+    placeholdersInRow(row) {
+      return this.cols - this.bookablesInRow(row).length;
+    }
   },
 
   created() {
