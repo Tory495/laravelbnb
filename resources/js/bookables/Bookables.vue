@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    Rows: {{ rows }}
     <div v-if="loading">data is loading...</div>
     <div v-else>
       <div class="row" v-for="row in rows" :key="'row' + row">
-        <div class="col" v-for="(bookable, col) in bookablesInRow(row)" :key="'col' + row + col">
+        <div class="col d-flex align-items-stretch" v-for="(bookable, col) in bookablesInRow(row)" :key="'col' + row + col">
           <bookables-list-item
             :item-title="bookable.title"
-            :item-content="bookable.content"
+            :item-description="bookable.description"
             :item-price="1000"
           ></bookables-list-item>
         </div>
@@ -48,41 +47,10 @@ export default {
   },
 
   created() {
-    console.log("created");
-
-    setTimeout(() => {
-      this.bookables = [
-        {
-          title: "very cheap villa",
-          content: "very cheap villa you know",
-        },
-        {
-          title: "cheap villa",
-          content: "cheap villa we know",
-        },
-        {
-          title: "cheap villa3",
-          content: "cheap villa we know",
-        },
-        {
-          title: "cheap villa4",
-          content: "cheap villa we know",
-        },
-        {
-          title: "cheap villa5",
-          content: "cheap villa we know",
-        },
-        {
-          title: "cheap villa6",
-          content: "cheap villa we know",
-        },
-        {
-          title: "cheap villa7",
-          content: "cheap villa we know",
-        },
-      ];
+    const request = axios.get("/api/bookables").then((result) => {
+      this.bookables = result.data;
       this.loading = false;
-    }, 5000);
+    });
   },
 };
 </script>
