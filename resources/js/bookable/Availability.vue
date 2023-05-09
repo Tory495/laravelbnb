@@ -13,7 +13,15 @@
           placeholder="Start date"
           v-model="from"
           @keyup.enter="check()"
+          :class="{ 'is-invalid': errorFor('from') }"
         />
+        <div
+          class="invalid-feedback"
+          v-for="(error, index) in errorFor('from')"
+          :key="`from${index}`"
+        >
+          {{ error }}
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="to">To</label>
@@ -24,11 +32,23 @@
           placeholder="End date"
           v-model="to"
           @keyup.enter="check()"
+          :class="{ 'is-invalid': errorFor('to') }"
         />
+        <div
+          class="invalid-feedback"
+          v-for="(error, index) in errorFor('to')"
+          :key="`to${index}`"
+        >
+          {{ error }}
+        </div>
       </div>
     </div>
     <div class="d-grid gap">
-      <button class="btn btn-secondary btn-block" @click="check()" :disabled="loading">
+      <button
+        class="btn btn-secondary btn-block"
+        @click="check()"
+        :disabled="loading"
+      >
         Check!
       </button>
     </div>
@@ -65,6 +85,15 @@ export default {
           this.status = error.response.status;
         })
         .finally(() => (this.loading = false));
+    },
+
+    errorFor(field) {
+      return this.hasErrors && this.errors[field] ? this.errors[field] : null;
+    },
+  },
+  computed: {
+    hasErrors() {
+      return this.status === 422 && this.errors;
     },
   },
 };
