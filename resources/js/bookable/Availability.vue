@@ -2,6 +2,8 @@
   <div>
     <h6 class="text-uppercase text-secondary text-weight-bolder">
       check availability
+      <span v-if="hasAvailability" class="text-uppercase text-success">(available)</span>
+      <span v-if="noAvailability" class="text-uppercase text-danger">(not available)</span>
     </h6>
     <div class="row mb-2">
       <div class="form-group col-md-6">
@@ -94,6 +96,12 @@ export default {
   computed: {
     hasErrors() {
       return this.status === 422 && this.errors;
+    },
+    hasAvailability() {
+      return this.status === 200;
+    },
+    noAvailability() {
+      return this.status === 404;
     },
   },
 };
