@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="d-grid gap">
-      <button class="btn btn-secondary btn-block" @click="check()">
+      <button class="btn btn-secondary btn-block" @click="check()" :disabled="loading">
         Check!
       </button>
     </div>
@@ -41,7 +41,7 @@ export default {
     return {
       from: null,
       to: null,
-      loading: true,
+      loading: false,
       status: null,
       errors: null,
     };
