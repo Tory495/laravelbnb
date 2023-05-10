@@ -18,4 +18,14 @@ class Review extends Model
     {
         return 'string';
     }
+
+    public function bookables()
+    {
+        return $this->belongsTo(Bookable::class);
+    }
+
+    public function bookings()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 }
