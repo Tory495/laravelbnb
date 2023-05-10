@@ -2,7 +2,6 @@
   <div style="padding: 1.25rem">
     <h6 class="text-uppercase text-secondary font-weight-bolder pt-4">
       review list
-			wer
     </h6>
     <div
       class="border-bottom d-none d-md-block"
