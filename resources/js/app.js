@@ -7,10 +7,9 @@ import Index from './components/Index';
 import BootstrapVue from "bootstrap-vue";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import moment from "moment";
 
-
-Vue.use(VueRouter).use(BootstrapVue);
-
+Vue.use(VueRouter).use(BootstrapVue).filter("fromNow", value => moment(value).fromNow());
 
 let app = new Vue({
 	el: '#app',

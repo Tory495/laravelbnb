@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">{{ review.created_at }}</div>
+          <div class="col-md-12">{{ review.created_at | fromNow }}</div>
         </div>
         <div class="row pt-4 pb-4">
           <div class="col-md-12">{{ review.content }}</div>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  props: { bookableId: String },
+  props: { bookableId: Number },
   data() {
     return {
       loading: false,

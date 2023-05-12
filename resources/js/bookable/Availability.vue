@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  props: { bookableId: String },
+  props: { bookableId: Number },
   data() {
     return {
       from: null,

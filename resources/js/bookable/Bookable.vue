@@ -1,20 +1,20 @@
 <template>
   <div class="row">
-    <div class="col-md-8 pb-4">
-      <div class="card">
-        <div class="card-body">
-          <div v-if="loading">data is loading...</div>
-          <div v-else>
+    <div v-if="loading">data is loading...</div>
+    <div v-else>
+      <div class="col-md-8 pb-4">
+        <div class="card">
+          <div class="card-body">
             <h5>{{ bookable.title }}</h5>
             <hr />
             <article>{{ bookable.description }}</article>
           </div>
         </div>
+        <review-list :bookable-id="bookable.id"></review-list>
       </div>
-      <review-list :bookable-id="bookable.id"></review-list>
-    </div>
-    <div class="col-md-4 pb-4">
-      <availability :bookable-id="bookable.id"></availability>
+      <div class="col-md-4 pb-4">
+        <availability :bookable-id="bookable.id"></availability>
+      </div>
     </div>
   </div>
 </template>
