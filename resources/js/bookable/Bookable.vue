@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
+  <div>
     <div v-if="loading">data is loading...</div>
-    <div v-else>
+    <div v-else class="row">
       <div class="col-md-8 pb-4">
         <div class="card">
           <div class="card-body">
