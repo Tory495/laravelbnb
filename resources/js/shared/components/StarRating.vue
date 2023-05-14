@@ -4,12 +4,14 @@
       class="fas fa-star"
       v-for="star in fullStars"
       :key="`fullStar${star}`"
+      @click="$emit('rating:changed', star)"
     ></i>
     <i class="fas fa-star-half-alt" v-if="halfStar"></i>
     <i
       class="far fa-star"
       v-for="star in emptyStars"
       :key="`emptyStar${star}`"
+      @click="$emit('rating:changed', fullStars + star)"
     ></i>
   </div>
 </template>
@@ -27,6 +29,11 @@ export default {
     },
     emptyStars() {
       return 5 - Math.ceil(this.rating);
+    },
+  },
+  methods: {
+    heyBuddy(smt) {
+      console.log(`hey buddy im here ${smt}`);
     },
   },
 };

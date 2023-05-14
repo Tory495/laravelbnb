@@ -2,7 +2,7 @@
   <div>
     <div class="form-group mb-4">
         <label class="text-muted">Select rating (1 is worst | 5 is best)</label>
-        <star-rating :rating="5" class="fa-3x"></star-rating>
+        <star-rating v-on:rating:changed="review.rating = $event" :rating="5" class="fa-3x"></star-rating>
     </div>
     <div class="form-group mb-4">
         <label for="content" class="text-muted">Write your experience with</label>
@@ -14,7 +14,14 @@
 
 <script>
 export default {
-
+    data() {
+        return {
+            review: {
+                rating: 5,
+                content: null
+            }
+        }
+    },
 }
 </script>
 
