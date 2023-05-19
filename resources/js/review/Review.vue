@@ -22,6 +22,11 @@ export default {
             }
         }
     },
+    created() {
+        // 1. If review already exists (in reviews table by id)
+        // 2. Fetch a booking by a review key
+        // 3. Store the review
+    },
 }
 </script>
 
