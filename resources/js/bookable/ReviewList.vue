@@ -41,7 +41,7 @@ export default {
     axios
       .get(`/api/bookables/${this.bookableId}/reviews`)
       .then((response) => (this.reviews = response.data.data))
-      .finally(() => (this.loading = false));
+      .then(() => (this.loading = false));
   },
 };
 </script>

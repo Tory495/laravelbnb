@@ -91,7 +91,7 @@ export default {
           }
           this.status = error.response.status;
         })
-        .finally(() => (this.loading = false));
+        .then(() => (this.loading = false));
     },
 
     errorFor(field) {

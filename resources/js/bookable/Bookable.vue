@@ -36,10 +36,10 @@ export default {
   },
 
   created() {
-    axios.get(`/api/bookables/${this.$route.params.id}`).then((response) => {
-      this.bookable = response.data.data;
-      this.loading = false;
-    });
+    axios
+      .get(`/api/bookables/${this.$route.params.id}`)
+      .then((response) => (this.bookable = response.data.data))
+      .then(() => laravelbnb);
   },
 };
 </script>

@@ -52,7 +52,7 @@ export default {
         this.existingReview = response.data.data;
       })
       .catch((err) => {})
-      .finally(() => (this.loading = false));
+      .then(() => (this.loading = false));
     // 2. Fetch a booking by a review key
     // 3. Store the review
   },
