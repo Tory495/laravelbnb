@@ -40,6 +40,7 @@ export default {
       },
       existingReview: null,
       loading: null,
+      booking: null,
     };
   },
   created() {
@@ -51,7 +52,17 @@ export default {
       .then((response) => {
         this.existingReview = response.data.data;
       })
-      .catch((err) => {})
+      .catch((err) => {
+        if (
+          err.response &&
+          err.response.status &&
+          err.response.status === 404
+        ) {
+          return axios
+            .get(`/api/booking-by-review/${this.$route.params.id}`)
+            .then((response) => (this.booking = response.data.data));
+        }
+      })
       .then(() => (this.loading = false));
     // 2. Fetch a booking by a review key
     // 3. Store the review
