@@ -45,7 +45,12 @@
                 class="form-control"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary w-100" @click.prevent="submit" :disabled="loading">
+            <button
+              type="submit"
+              class="btn btn-lg btn-primary w-100"
+              @click.prevent="submit"
+              :disabled="loading"
+            >
               Submit
             </button>
           </div>
@@ -57,7 +62,7 @@
 
 <script>
 import axios from "axios";
-import { is404 } from "./../shared/utils/response";
+import { is404, is422 } from "./../shared/utils/response";
 
 export default {
   data() {
@@ -71,6 +76,7 @@ export default {
       loading: null,
       booking: null,
       error: false,
+      errors: null,
     };
   },
   created() {
@@ -112,11 +118,21 @@ export default {
   },
   methods: {
     submit() {
+      this.errors = null;
       this.loading = true;
       axios
         .post(`/api/reviews`, this.review)
-        .then((response) => console.log(respponse))
-        .catch((err) => (this.error = true))
+        .then((response) => console.log(response))
+        .catch((err) => {
+          if (is422(err)) {
+            const errors = err.response.data.errors;
+            if (errors["content"] && _.size(errors) === 1) {
+              this.errors = errors;
+              return;
+            }
+          }
+          this.error = true;
+        })
         .then(() => (this.loading = false));
     },
   },
