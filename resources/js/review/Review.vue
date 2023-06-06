@@ -47,7 +47,7 @@
                 class="form-control"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-lg btn-primary w-100">
+            <button type="submit" class="btn btn-lg btn-primary w-100" @click.prevent="submit" :disabled="loading">
               Submit
             </button>
           </div>
@@ -110,6 +110,16 @@ export default {
     },
     twoColumns() {
       return this.loading || !this.alreadyReviewed;
+    },
+  },
+  methods: {
+    submit() {
+      this.loading = true;
+      axios
+        .post(`/api/reviews`, this.review)
+        .then((response) => console.log(respponse))
+        .catch((err) => (this.error = true))
+        .then(() => (this.loading = false));
     },
   },
 };
