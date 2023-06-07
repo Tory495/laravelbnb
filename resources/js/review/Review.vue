@@ -45,13 +45,7 @@
                 class="form-control"
                 :class="[{ 'is-invalid': errorFor('content') }]"
               ></textarea>
-              <div
-                class="invalid-feedback"
-                v-for="(error, index) in errorFor('content')"
-                :key="`content${index}`"
-              >
-                {{ error }}
-              </div>
+              <v-errors :errors="errorFor('content')"></v-errors>
             </div>
             <button
               type="submit"
