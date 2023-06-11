@@ -65,8 +65,10 @@
 <script>
 import axios from "axios";
 import { is404, is422 } from "./../shared/utils/response";
+import validationErrors from "../shared/mixins/validationErrors";
 
 export default {
+  mixins: [validationErrors],
   data() {
     return {
       review: {
@@ -78,7 +80,6 @@ export default {
       loading: null,
       booking: null,
       error: false,
-      errors: null,
       sending: null,
     };
   },
@@ -120,11 +121,6 @@ export default {
     },
   },
   methods: {
-    errorFor(field) {
-      return this.errors !== null && this.errors[field]
-        ? this.errors[field]
-        : null;
-    },
     submit() {
       this.errors = null;
       this.sending = true;

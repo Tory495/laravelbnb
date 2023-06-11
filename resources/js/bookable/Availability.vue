@@ -51,8 +51,10 @@
 
 <script>
 import { is422 } from "./../shared/utils/response";
+import validationErrors from "../shared/mixins/validationErrors";
 
 export default {
+  mixins: [validationErrors],
   props: { bookableId: Number },
   data() {
     return {
@@ -60,7 +62,6 @@ export default {
       to: null,
       loading: false,
       status: null,
-      errors: null,
     };
   },
   methods: {
@@ -82,10 +83,6 @@ export default {
           this.status = error.response.status;
         })
         .then(() => (this.loading = false));
-    },
-
-    errorFor(field) {
-      return this.hasErrors && this.errors[field] ? this.errors[field] : null;
     },
   },
   computed: {
