@@ -2,6 +2,7 @@ require('./bootstrap');
 
 // import components
 import Vue from "vue";
+import Vuex from "vuex"
 import VueRouter from "vue-router";
 import router from "./router";
 import Index from './components/Index';
@@ -19,7 +20,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import moment from "moment";
 
 
-Vue.use(VueRouter).use(BootstrapVue).filter("fromNow", value => moment(value).fromNow());
+Vue.use(Vuex).use(VueRouter).use(BootstrapVue).filter("fromNow", value => moment(value).fromNow());
 Vue.component("star-rating", StarRating);
 Vue.component("fatal-error", FatalError);
 Vue.component("success", Success);
