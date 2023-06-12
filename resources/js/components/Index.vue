@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ lastSearch.from }}
     <nav class="navbar bg-white border-bottom navbar-light">
       <router-link class="navbar-brand mr-auto" :to="{ name: 'bookables' }"
         >Bookables</router-link
