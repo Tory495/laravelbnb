@@ -35,5 +35,8 @@ let app = new Vue({
 	store,
 	components: {
 		Index,
+	},
+	beforeCreate() {
+		this.$store.dispatch("loadLastSearch");
 	}
 });

@@ -16,6 +16,12 @@ export default {
         setLastSearch(context, payload) {
             context.commit("setLastSearch", payload);
             localStorage.setItem("lastSearch", JSON.stringify(payload));
+        },
+        loadLastSearch(context) {
+            const lastSearch = localStorage.getItem("lastSearch");
+            if (lastSearch !== null) {
+                context.commit("setLastSearch", JSON.parse(lastSearch));
+            }
         }
     }
 }
