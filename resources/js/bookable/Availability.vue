@@ -2,12 +2,12 @@
   <div>
     <h6 class="text-uppercase text-secondary text-weight-bolder">
       check availability
-      <span v-if="hasAvailability" class="text-uppercase text-success"
-        >(available)</span
-      >
-      <span v-if="noAvailability" class="text-uppercase text-danger"
-        >(not available)</span
-      >
+      <transition class="text-uppercase">
+        <span v-if="hasAvailability" class="text-uppercase text-success"
+          >(available)</span
+        >
+        <span v-if="noAvailability" class="text-danger">(not available)</span>
+      </transition>
     </h6>
     <div class="row mb-2">
       <div class="form-group col-md-6">
