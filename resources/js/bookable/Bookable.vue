@@ -23,8 +23,10 @@
 </template>
 
 <script>
+import axios from "axios";
 import Availability from "./Availability";
 import ReviewList from "./ReviewList";
+import { mapState } from "vuex";
 export default {
   components: {
     Availability,
@@ -35,6 +37,7 @@ export default {
     return {
       bookable: null,
       loading: true,
+      price: null,
     };
   },
 
@@ -44,9 +47,28 @@ export default {
       .then((response) => (this.bookable = response.data.data))
       .then(() => (this.loading = false));
   },
+
+  computed: mapState({
+    lastSearch: "lastSearch",
+  }),
+
   methods: {
-    checkPrice(hasAvailability) {
-      console.log("available = ", hasAvailability);
+    async checkPrice(hasAvailability) {
+      if (!hasAvailability) {
+        this.price = null;
+        return;
+      }
+
+      try {
+        this.price = (
+          await axios.get(
+            `/api/bookable/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`
+          )
+        ).data.data;
+        console.log(this.price);
+      } catch (error) {
+        this.price = null;
+      }
     },
   },
 };
