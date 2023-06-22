@@ -13,7 +13,10 @@
         <review-list :bookable-id="bookable.id"></review-list>
       </div>
       <div class="col-md-4 pb-4">
-        <availability :bookable-id="bookable.id"></availability>
+        <availability
+          :bookable-id="bookable.id"
+          @availability="checkPrice($event)"
+        ></availability>
       </div>
     </div>
   </div>
@@ -39,7 +42,12 @@ export default {
     axios
       .get(`/api/bookables/${this.$route.params.id}`)
       .then((response) => (this.bookable = response.data.data))
-      .then(() => this.loading = false);
+      .then(() => (this.loading = false));
+  },
+  methods: {
+    checkPrice(hasAvailability) {
+      console.log("available = ", hasAvailability);
+    },
   },
 };
 </script>
