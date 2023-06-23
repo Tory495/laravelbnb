@@ -2,7 +2,7 @@
   <div>
     <h6 class="text-uppercase text-secondary text-weight-bolder">
       check availability
-      <transition class="text-uppercase">
+      <transition name="fade" class="text-uppercase">
         <span v-if="hasAvailability" class="text-uppercase text-success"
           >(available)</span
         >

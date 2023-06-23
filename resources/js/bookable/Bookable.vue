@@ -16,7 +16,14 @@
         <availability
           :bookable-id="bookable.id"
           @availability="checkPrice($event)"
+          class="mb-4"
         ></availability>
+        <transition name="fade">
+          <div v-if="price">
+            <price-breakdown :price="price"></price-breakdown>
+            <button class="mt-2 btn btn-outline-secondary w-100">Book</button>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -26,11 +33,13 @@
 import axios from "axios";
 import Availability from "./Availability";
 import ReviewList from "./ReviewList";
+import PriceBreakdown from "./PriceBreakdown";
 import { mapState } from "vuex";
 export default {
   components: {
     Availability,
     ReviewList,
+    PriceBreakdown,
   },
 
   data() {
@@ -65,7 +74,6 @@ export default {
             `/api/bookable/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`
           )
         ).data.data;
-        console.log(this.price);
       } catch (error) {
         this.price = null;
       }
@@ -74,5 +82,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.btn {
+  transition: all 0.5s;
+}
 </style>
