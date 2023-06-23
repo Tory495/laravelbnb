@@ -24,15 +24,18 @@
             <button
               class="mt-2 btn btn-outline-secondary w-100"
               @click="addToBasket"
-              :disabled="inBasketAlready"
+              :disabled="isAlreadyInBasketFromGetters"
             >
               Book
             </button>
           </div>
         </transition>
         <transition name="fade">
-          <div v-if="inBasketAlready">
-            <button class="mt-2 btn btn-outline-secondary w-100" @click="removeFromBasket">
+          <div v-if="isAlreadyInBasketFromGetters">
+            <button
+              class="mt-2 btn btn-outline-secondary w-100"
+              @click="removeFromBasket"
+            >
               Remove from basket
             </button>
             <div class="mt-4 text-muted warning">
@@ -51,7 +54,7 @@ import axios from "axios";
 import Availability from "./Availability";
 import ReviewList from "./ReviewList";
 import PriceBreakdown from "./PriceBreakdown";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   components: {
     Availability,
@@ -74,19 +77,18 @@ export default {
       .then(() => (this.loading = false));
   },
 
-  computed: mapState({
-    lastSearch: "lastSearch",
-    inBasketAlready(state) {
+  computed: {
+    ...mapState({
+      lastSearch: "lastSearch",
+    }),
+    isAlreadyInBasketFromGetters() {
       if (this.bookable === null) {
         return false;
       }
 
-      return state.basket.items.reduce(
-        (result, item) => result || item.bookable.id === this.bookable.id,
-        false
-      );
+      return this.$store.getters.isAlreadyInBasket(this.bookable.id);
     },
-  }),
+  },
 
   methods: {
     async checkPrice(hasAvailability) {
