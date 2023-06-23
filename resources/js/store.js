@@ -19,6 +19,9 @@ export default {
         },
         removeFromBasket(state, payload) {
             state.basket.items = state.basket.items.filter((item) => item.bookable.id !== payload);
+        },
+        setBasket(state, payload) {
+            state.basket = payload;
         }
     },
     actions: {
@@ -26,12 +29,26 @@ export default {
             context.commit("setLastSearch", payload);
             localStorage.setItem("lastSearch", JSON.stringify(payload));
         },
+        addToBasket({ commit, state }, payload) {
+            commit("addToBasket", payload);
+            localStorage.setItem("basket", JSON.stringify(state.basket));
+        },
+        removeFromBasket({ commit, state }, payload) {
+            commit("removeFromBasket", payload);
+            localStorage.setItem("basket", JSON.stringify(state.basket));
+        },
         loadLastSearch(context) {
             const lastSearch = localStorage.getItem("lastSearch");
             if (lastSearch !== null) {
                 context.commit("setLastSearch", JSON.parse(lastSearch));
             }
-        }
+
+            const basket = localStorage.getItem("basket");
+            if (basket !== null) {
+                context.commit("setBasket", JSON.parse(basket));
+            }
+        },
+
     },
     getters: {
         itemsInBasket: (state) => state.basket.items.length,

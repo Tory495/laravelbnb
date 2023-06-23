@@ -108,14 +108,14 @@ export default {
       }
     },
     addToBasket() {
-      this.$store.commit("addToBasket", {
+      this.$store.dispatch("addToBasket", {
         bookable: this.bookable,
         dates: this.lastSearch,
         price: this.price,
       });
     },
     removeFromBasket() {
-      this.$store.commit("removeFromBasket", this.bookable.id);
+      this.$store.dispatch("removeFromBasket", this.bookable.id);
     },
   },
 };
