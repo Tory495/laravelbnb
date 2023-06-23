@@ -21,7 +21,24 @@
         <transition name="fade">
           <div v-if="price">
             <price-breakdown :price="price"></price-breakdown>
-            <button class="mt-2 btn btn-outline-secondary w-100" @click="addToBasket">Book</button>
+            <button
+              class="mt-2 btn btn-outline-secondary w-100"
+              @click="addToBasket"
+              :disabled="inBasketAlready"
+            >
+              Book
+            </button>
+          </div>
+        </transition>
+        <transition name="fade">
+          <div v-if="inBasketAlready">
+            <button class="mt-2 btn btn-outline-secondary w-100" @click="removeFromBasket">
+              Remove from basket
+            </button>
+            <div class="mt-4 text-muted warning">
+              I've found that you already booked that object. To preform booking
+              another dates, firstly remove previous from basket
+            </div>
           </div>
         </transition>
       </div>
@@ -59,6 +76,16 @@ export default {
 
   computed: mapState({
     lastSearch: "lastSearch",
+    inBasketAlready(state) {
+      if (this.bookable === null) {
+        return false;
+      }
+
+      return state.basket.items.reduce(
+        (result, item) => result || item.bookable.id === this.bookable.id,
+        false
+      );
+    },
   }),
 
   methods: {
@@ -85,6 +112,9 @@ export default {
         price: this.price,
       });
     },
+    removeFromBasket() {
+      this.$store.commit("removeFromBasket", this.bookable.id);
+    },
   },
 };
 </script>
@@ -92,5 +122,8 @@ export default {
 <style scoped>
 .btn {
   transition: all 0.5s;
+}
+.warning {
+  font-size: 0.7rem;
 }
 </style>

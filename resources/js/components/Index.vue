@@ -5,8 +5,9 @@
         >Bookables</router-link
       >
       <router-link class="btn nav-button" :to="{}">
-        Basket:
+        Basket
         <span v-if="itemsInBasket">{{ itemsInBasket }}</span>
+        <span v-else>empty</span>
       </router-link>
     </nav>
     <div class="container-md mt-5 mb-5 pr-5 pl-5">
