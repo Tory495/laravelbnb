@@ -4,9 +4,9 @@
       <router-link class="navbar-brand mr-auto" :to="{ name: 'bookables' }"
         >Bookables</router-link
       >
-      <router-link class="btn nav-button" :to="{}">
+      <router-link class="btn nav-button" :to="{ name: 'basket' }">
         Basket
-        <span v-if="itemsInBasket">{{ itemsInBasket }}</span>
+        <span class="basket-badge" v-if="itemsInBasket">{{ itemsInBasket }}</span>
         <span v-else>empty</span>
       </router-link>
     </nav>
