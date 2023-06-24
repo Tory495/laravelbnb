@@ -4,14 +4,14 @@
     <div v-else>
       <div class="row" v-for="row in rows" :key="'row' + row">
         <div
-          class="col d-flex align-items-stretch"
+          class="col-md d-flex align-items-stretch"
           v-for="(bookable, col) in bookablesInRow(row)"
           :key="'col' + row + col"
         >
           <bookables-list-item v-bind="bookable"></bookables-list-item>
         </div>
         <div
-          class="col"
+          class="col-md"
           v-for="placeholder in placeholdersInRow(row)"
           :key="'placeholder' + row + placeholder"
         />

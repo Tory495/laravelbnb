@@ -1,6 +1,49 @@
 <template>
   <div class="row">
-    <div class="col-md-8">Checkout form</div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-6 form-group mb-3">
+          <label for="first-name" class="form-label">First name</label>
+          <input id="first-name" name="first-name" type="text" class="form-control" />
+        </div>
+        <div class="col-md-6 form-group mb-3">
+          <label for="last-name" class="form-label">Last name</label>
+          <input id="last-name" name="last-name" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 form-group mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input id="email" name="email" type="email" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 form-group mb-3">
+          <label for="street" class="form-label">Street</label>
+          <input id="street" class="form-control" name="street" type="text" />
+        </div>
+        <div class="col-md-6 form-group mb-3">
+          <label for="city" class="form-label">City</label>
+          <input id="city" class="form-control" name="city" type="text" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 form-group mb-3">
+          <label for="country" class="form-label">Country</label>
+          <input id="country" class="form-control" name="country" type="text" />
+        </div>
+        <div class="col-md-4 form-group mb-3">
+          <label for="state" class="form-label">State</label>
+          <input id="state" class="form-control" name="state" type="text" />
+        </div>
+        <div class="col-md-2 form-group mb-3">
+          <label for="zip" class="form-label">Zip</label>
+          <input id="zip" class="form-control" name="zip" type="text" />
+        </div>
+      </div>
+      <hr />
+      <div class="btn btn-primary btn-lg w-100">Book now!</div>
+    </div>
     <div class="col-md-4">
       <div class="d-flex justify-content-between">
         <h6 class="text-uppercase text-secondary font-weight-bolder">
