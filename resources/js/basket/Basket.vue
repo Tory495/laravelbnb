@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8" v-if="itemsInBasket">
       <div class="row">
         <div class="col-md-6 form-group mb-3">
           <label for="first_name" class="form-label">First name</label>
@@ -98,6 +98,11 @@
         Book now!
       </div>
     </div>
+    <div class="col-md-8" v-else>
+      <div class="jumbotron jumbotron-fluid text-center">
+        <h1>Empty</h1>
+      </div>
+    </div>
     <div class="col-md-4">
       <div class="d-flex justify-content-between">
         <h6 class="text-uppercase text-secondary font-weight-bolder">
@@ -184,5 +189,9 @@ export default {
 <style scoped>
 a {
   color: #000000;
+}
+.jumbotron {
+  background-color: #CCCCCC;
+  padding: 50px 0;
 }
 </style>
