@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Bookable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 
 class BookablePriceController extends Controller
 {
@@ -23,16 +22,8 @@ class BookablePriceController extends Controller
         ]);
 
         $bookable = Bookable::findOrFail($bookable_id);
-        $days = (new Carbon($validated['from']))->diffInDays(new Carbon($validated['to'])) + 1;
-        
-        $total = $days * $bookable->price;
         return response()->json([
-            'data' => [
-                'total' => $total,
-                'breakdown' => [
-                    $bookable->price => $days
-                ]
-            ]
+            'data' => $bookable->priceFor($validated['from'], $validated['to'])
         ]);
     }
 }
