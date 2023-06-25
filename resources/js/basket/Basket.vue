@@ -179,6 +179,7 @@ export default {
             to: basketItem.dates.to,
           })),
         });
+        this.$store.dispatch("clearBasket");
       } catch (error) {}
       this.loading = false;
     },
@@ -191,7 +192,7 @@ a {
   color: #000000;
 }
 .jumbotron {
-  background-color: #CCCCCC;
+  background-color: #cccccc;
   padding: 50px 0;
 }
 </style>

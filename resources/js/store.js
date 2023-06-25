@@ -48,6 +48,10 @@ export default {
                 context.commit("setBasket", JSON.parse(basket));
             }
         },
+        clearBasket({ commit, state }, payload) {
+            commit("setBasket", { items: [] });
+            localStorage.setItem("basket", JSON.stringify(state.basket));
+        }
 
     },
     getters: {
