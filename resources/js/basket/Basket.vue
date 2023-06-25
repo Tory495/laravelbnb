@@ -90,7 +90,13 @@
         </div>
       </div>
       <hr />
-      <div class="btn btn-primary btn-lg w-100">Book now!</div>
+      <div
+        class="btn btn-primary btn-lg w-100"
+        type="submit"
+        @click.prevent="book"
+      >
+        Book now!
+      </div>
     </div>
     <div class="col-md-4">
       <div class="d-flex justify-content-between">
@@ -131,9 +137,12 @@
 </template>
 
 <script>
+import axios from "axios";
 import { mapState, mapGetters } from "vuex";
+import validationErrors from "../shared/mixins/validationErrors";
 
 export default {
+  mixins: [validationErrors],
   data() {
     return {
       customer: {
@@ -146,11 +155,28 @@ export default {
         state: null,
         zip: null,
       },
+      loading: false,
     };
   },
   computed: {
     ...mapState({ basket: (state) => state.basket.items }),
     ...mapGetters(["itemsInBasket"]),
+  },
+  methods: {
+    async book() {
+      this.loading = true;
+      try {
+        await axios.post(`api/checkout`, {
+          customer: this.customer,
+          bookings: this.basket.map((basketItem) => ({
+            bookable_id: basketItem.bookable.id,
+            from: basketItem.dates.from,
+            to: basketItem.dates.to,
+          })),
+        });
+      } catch (error) {}
+      this.loading = false;
+    },
   },
 };
 </script>
