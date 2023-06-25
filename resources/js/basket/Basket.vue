@@ -3,12 +3,12 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-6 form-group mb-3">
-          <label for="first-name" class="form-label">First name</label>
-          <input id="first-name" name="first-name" type="text" class="form-control" />
+          <label for="first_name" class="form-label">First name</label>
+          <input id="first_name" name="first_name" type="text" class="form-control" />
         </div>
         <div class="col-md-6 form-group mb-3">
-          <label for="last-name" class="form-label">Last name</label>
-          <input id="last-name" name="last-name" type="text" class="form-control" />
+          <label for="last_name" class="form-label">Last name</label>
+          <input id="last_name" name="last_name" type="text" class="form-control" />
         </div>
       </div>
       <div class="row">
