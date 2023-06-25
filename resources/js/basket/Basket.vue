@@ -10,8 +10,11 @@
             type="text"
             class="form-control"
             v-model="customer.first_name"
+            :class="{ 'is-invalid': errorFor('customer.first_name') }"
           />
+          <v-errors :errors="errorFor('customer.first_name')"></v-errors>
         </div>
+
         <div class="col-md-6 form-group mb-3">
           <label for="last_name" class="form-label">Last name</label>
           <input
@@ -20,7 +23,9 @@
             type="text"
             class="form-control"
             v-model="customer.last_name"
+            :class="{ 'is-invalid': errorFor('customer.last_name') }"
           />
+          <v-errors :errors="errorFor('customer.last_name')"></v-errors>
         </div>
       </div>
       <div class="row">
@@ -32,7 +37,9 @@
             type="email"
             class="form-control"
             v-model="customer.email"
+            :class="{ 'is-invalid': errorFor('customer.email') }"
           />
+          <v-errors :errors="errorFor('customer.email')"></v-errors>
         </div>
       </div>
       <div class="row">
@@ -44,7 +51,9 @@
             name="street"
             type="text"
             v-model="customer.street"
+            :class="{ 'is-invalid': errorFor('customer.street') }"
           />
+          <v-errors :errors="errorFor('customer.street')"></v-errors>
         </div>
         <div class="col-md-6 form-group mb-3">
           <label for="city" class="form-label">City</label>
@@ -54,7 +63,9 @@
             name="city"
             type="text"
             v-model="customer.city"
+            :class="{ 'is-invalid': errorFor('customer.city') }"
           />
+          <v-errors :errors="errorFor('customer.city')"></v-errors>
         </div>
       </div>
       <div class="row">
@@ -66,7 +77,9 @@
             name="country"
             type="text"
             v-model="customer.country"
+            :class="{ 'is-invalid': errorFor('customer.country') }"
           />
+          <v-errors :errors="errorFor('customer.country')"></v-errors>
         </div>
         <div class="col-md-4 form-group mb-3">
           <label for="state" class="form-label">State</label>
@@ -76,7 +89,9 @@
             name="state"
             type="text"
             v-model="customer.state"
+            :class="{ 'is-invalid': errorFor('customer.state') }"
           />
+          <v-errors :errors="errorFor('customer.state')"></v-errors>
         </div>
         <div class="col-md-2 form-group mb-3">
           <label for="zip" class="form-label">Zip</label>
@@ -86,17 +101,20 @@
             name="zip"
             type="text"
             v-model="customer.zip"
+            :class="{ 'is-invalid': errorFor('customer.zip') }"
           />
+          <v-errors :errors="errorFor('customer.zip')"></v-errors>
         </div>
       </div>
       <hr />
-      <div
+      <button
         class="btn btn-primary btn-lg w-100"
         type="submit"
         @click.prevent="book"
+        :disabled="loading"
       >
         Book now!
-      </div>
+      </button>
     </div>
     <div class="col-md-8" v-else>
       <div class="jumbotron jumbotron-fluid text-center">
@@ -161,6 +179,7 @@ export default {
         zip: null,
       },
       loading: false,
+      errors: null,
     };
   },
   computed: {
@@ -170,6 +189,7 @@ export default {
   methods: {
     async book() {
       this.loading = true;
+      this.errors = null;
       try {
         await axios.post(`api/checkout`, {
           customer: this.customer,
@@ -180,7 +200,9 @@ export default {
           })),
         });
         this.$store.dispatch("clearBasket");
-      } catch (error) {}
+      } catch (error) {
+        this.errors = error.response && error.response.data.errors;
+      }
       this.loading = false;
     },
   },
