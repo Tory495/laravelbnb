@@ -8,6 +8,8 @@ export default new VueRouter({
 		{ name: 'review', path: '/review/:id', component: require('./review/Review').default },
 		{ name: 'basket', path: '/basket', component: require('./basket/Basket').default },
 		{ name: 'login', path: '/auth/login', component: require("./auth/Login").default },
+		{ name: 'register', path: '/auth/register', component: require("./auth/Register").default },
+		
 
 	]
 });
