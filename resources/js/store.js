@@ -7,7 +7,9 @@ export default {
             },
             basket: {
                 items: []
-            }
+            },
+            isLoggedIn: false,
+            user: {}
         }
     },
     mutations: {

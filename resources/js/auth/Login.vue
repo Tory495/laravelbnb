@@ -43,14 +43,14 @@
 
         <div>
           Register
-          <router-link :to="{ name: 'home' }" class="font-weight-bold"
+          <router-link :to="{  }" class="font-weight-bold"
             >Register</router-link
           >
         </div>
 
         <div>
           Forgotten password?
-          <router-link :to="{ name: 'home' }" class="font-weight-bold"
+          <router-link :to="{  }" class="font-weight-bold"
             >Reset password</router-link
           >
         </div>
