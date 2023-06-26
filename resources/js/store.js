@@ -47,7 +47,7 @@ export default {
             commit("removeFromBasket", payload);
             localStorage.setItem("basket", JSON.stringify(state.basket));
         },
-        loadLastSearch(context) {
+        loadStoredState(context) {
             const lastSearch = localStorage.getItem("lastSearch");
             if (lastSearch !== null) {
                 context.commit("setLastSearch", JSON.parse(lastSearch));
@@ -57,6 +57,8 @@ export default {
             if (basket !== null) {
                 context.commit("setBasket", JSON.parse(basket));
             }
+
+            context.commit("setLoggedIn", isLoggedIn());
         },
         clearBasket({ commit, state }, payload) {
             commit("setBasket", { items: [] });
