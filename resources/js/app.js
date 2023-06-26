@@ -19,6 +19,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // import libraries
 import moment from "moment";
+import axios from "axios";
 
 
 Vue.use(Vuex).use(VueRouter).use(BootstrapVue).filter("fromNow", value => moment(value).fromNow());
@@ -36,7 +37,13 @@ let app = new Vue({
 	components: {
 		Index,
 	},
-	beforeCreate() {
+	async beforeCreate() {
 		this.$store.dispatch("loadLastSearch");
+		await axios.get("/sanctum/csrf-cookie");
+		await axios.post("/api/auth/login", {
+			email: "kody95@example.com",
+			password: "password"
+		});
+		await axios.get("/user");
 	}
 });
