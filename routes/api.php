@@ -30,3 +30,4 @@ Route::apiResource('reviews', ReviewController::class)->only('show', 'store');
 Route::post('checkout', CheckoutController::class)->name('checkout');
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
