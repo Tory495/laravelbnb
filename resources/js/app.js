@@ -39,5 +39,6 @@ let app = new Vue({
 	},
 	async beforeCreate() {
 		this.$store.dispatch("loadLastSearch");
+		this.$store.dispatch("loadUser");
 	}
 });
