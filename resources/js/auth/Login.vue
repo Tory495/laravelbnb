@@ -5,6 +5,7 @@
         <div class="form-group mb-3">
           <label for="email">E-mail</label>
           <input
+            id="email"
             type="text"
             name="email"
             placeholder="Enter your e-mail"
@@ -16,8 +17,9 @@
         </div>
 
         <div class="form-group mb-3">
-          <label for="email">Password</label>
+          <label for="password">Password</label>
           <input
+            id="password"
             type="password"
             name="password"
             placeholder="Enter your password"
@@ -28,7 +30,12 @@
           <v-errors :errors="errorFor('password')"></v-errors>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block">
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg btn-block"
+          :disabled="loading"
+          @click.prevent="login"
+        >
           Login
         </button>
 
@@ -61,7 +68,25 @@ export default {
     return {
       email: null,
       password: null,
+      loading: false,
     };
+  },
+  methods: {
+    async login() {
+      this.loading = true;
+      this.errors = null;
+      try {
+        await axios.get("/sanctum/csrf-cookie");
+        await axios.post("/api/auth/login", {
+          email: this.email,
+          password: this.password,
+        });
+        await axios.get("/user");
+      } catch (error) {
+        this.errors = error.response && error.response.data.errors;
+      }
+      this.loading = false;
+    },
   },
 };
 </script>
